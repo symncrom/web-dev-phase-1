@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 1 - Dynamic DOM Manipulation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background-color: #1e293b;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #38bdf8;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background-color: #38bdf8;
+      color: #0f172a;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #7dd3fc;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #334155;
+      color: #f8fafc;
+    }
+
+    .btn-secondary:hover {
+      background-color: #475569;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .card {
+      background-color: #1e293b;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: #38bdf8;
+    }
+
+    .card h3 {
+      color: #38bdf8;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">DevLab</div>
+    <span>Phase 1: JavaScript</span>
+  </nav>
+
+  <main>
+    <h1>Dynamic DOM Manipulation</h1>
+    
+    <div class="controls">
+      <button class="btn" id="addCardBtn">Add Project Card</button>
+      <button class="btn btn-secondary" id="clearBtn">Clear All</button>
+    </div>
+
+    <div class="grid" id="cardContainer">
+      <!-- Dynamic content inserts here -->
+    </div>
+  </main>
+
+  <script>
+    // 1. Select elements from the DOM
+    const addBtn = document.getElementById('addCardBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const container = document.getElementById('cardContainer');
+
+    let cardCount = 0;
+
+    // 2. Define element creation function
+    function createCard() {
+      cardCount++;
+      
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <h3>Module ${cardCount}</h3>
+        <p>This UI card was rendered dynamically using modern JavaScript.</p>
+      `;
+
+      container.appendChild(card);
+    }
+
+    // 3. Register click handlers
+    addBtn.addEventListener('click', createCard);
+
+    clearBtn.addEventListener('click', () => {
+      container.innerHTML = '';
+      cardCount = 0;
+    });
+  </script>
+
+</body>
+</html>
